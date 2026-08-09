@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Makes the website work properly on phones -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>A Little Surprise for You | Kaleigh</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&family=Parisienne&display=swap" rel="stylesheet">
+
+    <!-- Our CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =========================================
+         OPENING SCREEN
+    ========================================== -->
+
+    <section id="opening-screen" class="opening-screen">
+
+        <!-- Decorative background elements -->
+        <div class="gold-orb orb-one"></div>
+        <div class="gold-orb orb-two"></div>
+
+        <div class="opening-content">
+
+            <p class="opening-small-text">
+                A little miracle...
+            </p>
+
+            <h1 id="typing-text"></h1>
+
+            <div class="opening-divider">
+                <span></span>
+                <span class="divider-cross">✦</span>
+                <span></span>
+            </div>
+
+            <button id="open-proposal" class="open-button">
+                <span>Open My Proposal</span>
+                <span class="button-arrow"></span>
+            </button>
+
+            <p class="opening-note">
+                A little message from Kaleigh
+            </p>
+
+        </div>
+
+    </section>
+
+
+   <!-- =========================================
+     HERO / INTRODUCTION
+========================================= -->
+
+<section id="hero" class="hero-section">
+
+    <!-- Decorative elements -->
+    <div class="hero-decoration hero-decoration-top"></div>
+    <div class="hero-decoration hero-decoration-bottom"></div>
+
+    <div class="hero-content">
+
+        <!-- Personalized greeting -->
+        <p class="hero-greeting">
+    Dear <span id="godparent-role">Someone Special</span>
+    <span id="godparent-name"></span>
+</p>
+
+
+        <!-- Small introduction -->
+        <p class="hero-eyebrow">
+            A little story about me
+        </p>
+
+
+        <!-- Main title -->
+        <h1 class="hero-title">
+            Hello!<br>
+            <span>Get to Know Me</span>
+        </h1>
+
+
+        <!-- Subtitle -->
+        <p class="hero-subtitle">
+            A little story about my journey so far,
+            shared with love by Mom and Dad.
+        </p>
+
+
+        <!-- Baby photo -->
+        <div class="hero-photo-frame">
+
+            <div class="hero-photo-inner">
+
+                <img
+                    src="images/baby.jpg"
+                    alt="Baby Kaleigh"
+                >
+
+            </div>
+
+            <div class="photo-flower flower-left">✦</div>
+            <div class="photo-flower flower-right">✦</div>
+
+        </div>
+
+
+        <!-- Baby name -->
+        <div class="hero-name">
+
+            <p class="name-small">
+                Meet
+            </p>
+
+            <h2>
+                Kaleigh Franzelle
+                <span>Cordova Occo</span>
+            </h2>
+
+        </div>
+
+
+        <!-- Decorative divider -->
+        <div class="hero-divider">
+
+            <span></span>
+
+            <span class="hero-cross">
+                ✦
+            </span>
+
+            <span></span>
+
+        </div>
+
+
+        <!-- Scroll invitation -->
+        <p class="hero-scroll">
+            Keep reading my little story
+            <span>↓</span>
+        </p>
+
+    </div>
+
+</section>
+
+    <!-- =========================================
+         MUSIC
+    ========================================== -->
+
+    <audio id="background-music" loop>
+        <source src="music/piano.mp3" type="audio/mpeg">
+    </audio>
+
+    <button
+        id="music-toggle"
+        class="music-toggle"
+        aria-label="Turn music off"
+        title="Music On">
+        ♫
+    </button>
+
+<!-- =========================================
+     RESPONSE POPUP
+========================================= -->
+
+<div
+    id="response-popup"
+    class="response-popup"
+    aria-hidden="true"
+>
+
+    <div class="response-popup-card">
+
+        <!-- Decorative close button -->
+        <button
+            type="button"
+            id="close-popup"
+            class="close-popup"
+            aria-label="Close"
+        >
+            ×
+        </button>
+
+
+        <!-- Decorative symbol -->
+        <div class="popup-symbol">
+            ✦
+        </div>
+
+
+        <!-- Popup title -->
+        <h2 id="popup-title">
+            Thank You So Much!
+        </h2>
+
+
+        <!-- Popup message -->
+        <div
+            id="popup-message"
+            class="popup-message"
+        >
+        </div>
+
+
+        <!-- Decorative divider -->
+        <div class="popup-divider">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+
+        <!-- Close button -->
+        <button
+            type="button"
+            id="popup-continue"
+            class="popup-continue"
+        >
+            Continue
+        </button>
+
+    </div>
+
+</div>
+<!-- =========================================
+     RESPONSE POPUP
+========================================= -->
+
+<div
+    id="response-popup"
+    class="response-popup"
+    aria-hidden="true"
+>
+
+    <div class="response-popup-card">
+
+        <button
+            type="button"
+            id="close-popup"
+            class="close-popup"
+            aria-label="Close"
+        >
+            ×
+        </button>
+
+        <div class="popup-symbol">
+            ✦
+        </div>
+
+        <h2 id="popup-title">
+            Thank You So Much!
+        </h2>
+
+        <div
+            id="popup-message"
+            class="popup-message"
+        >
+        </div>
+
+        <div class="popup-divider">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <button
+            type="button"
+            id="popup-continue"
+            class="popup-continue"
+        >
+            Continue
+        </button>
+
+    </div>
+
+</div>
+<!-- =========================================
+     SECTION 2 — HOW I GOT MY NAME
+========================================= -->
+
+<section id="name-story" class="story-section name-story">
+
+    <div class="story-container">
+
+        <!-- Small section label -->
+        <p class="story-eyebrow">
+            Chapter One
+        </p>
+
+
+        <!-- Section title -->
+        <h2 class="story-title">
+            How I Got
+            <span>My Name</span>
+        </h2>
+
+
+        <!-- Decorative divider -->
+        <div class="story-divider">
+            <span></span>
+            <span>✦</span>
+            <span></span>
+        </div>
+
+
+        <!-- Story card -->
+        <div class="name-story-card">
+
+            <div class="story-card-decoration">
+                ✦
+            </div>
+
+
+            <p class="story-opening">
+                Before I arrived, Mom and Dad spent months
+                searching for a name that would carry
+                <em>love, grace, and strength.</em>
+            </p>
+
+
+            <p>
+                They chose
+                <strong>Kaleigh Franzelle.</strong>
+            </p>
+
+
+            <!-- Kaleigh -->
+            <div class="name-meaning">
+
+                <h3>
+                    Kaleigh
+                </h3>
+
+                <p>
+                    represents joy and brightness,
+                    bringing light to everyone around me.
+                </p>
+
+            </div>
+
+
+            <!-- Franzelle -->
+            <div class="name-meaning">
+
+                <h3>
+                    Franzelle
+                </h3>
+
+                <p>
+                    holds a special connection to father
+                    and daughter, honoring love and legacy.
+                </p>
+
+            </div>
+
+
+            <!-- Closing -->
+            <div class="story-closing">
+
+                <div class="little-heart">
+                </div>
+
+                <p>
+                    Together, my name is a gift from my
+                    parents—a constant reminder of how
+                    deeply I am loved.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Continue message -->
+        <div class="continue-reading">
+
+            <span>Keep turning the page</span>
+
+            <div>↓</div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- =========================================
+     SECTION 3 — THE DAY I WAS BORN
+========================================= -->
+
+<section id="birth-story" class="birth-section">
+
+    <div class="birth-container">
+
+        <!-- Chapter label -->
+        <p class="story-eyebrow">
+            Chapter Two
+        </p>
+
+
+        <!-- Section title -->
+        <h2 class="birth-title">
+            The Day I
+            <span>Was Born</span>
+        </h2>
+
+
+        <!-- Date -->
+        <div class="birth-date">
+
+            <span class="date-line"></span>
+
+            <p>June 27, 2026</p>
+
+            <span class="date-line"></span>
+
+        </div>
+
+
+        <!-- Main birth card -->
+        <div class="birth-card">
+
+            <!-- Decorative top -->
+            <div class="birth-card-symbol">
+                ✦
+            </div>
+
+
+            <!-- Time -->
+            <div class="birth-detail">
+
+                <span class="detail-label">
+                    The Time
+                </span>
+
+                <h3>
+                    9:50 AM
+                </h3>
+
+            </div>
+
+
+            <!-- Place -->
+            <div class="birth-detail">
+
+                <span class="detail-label">
+                    The Place
+                </span>
+
+                <h3>
+                    Saint Anthony Mother<br>
+                    and Child Hospital
+                </h3>
+
+                <p>
+                    Cebu City
+                </p>
+
+            </div>
+
+
+            <!-- Birth measurements -->
+            <div class="birth-measurements">
+
+                <div class="measurement">
+
+                    <span class="detail-label">
+                        Weight
+                    </span>
+
+                    <strong>
+                        2.6 kg
+                    </strong>
+
+                </div>
+
+
+                <div class="measurement-divider">
+                    ✦
+                </div>
+
+
+                <div class="measurement">
+
+                    <span class="detail-label">
+                        Height
+                    </span>
+
+                    <strong>
+                        50 cm
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- Parents' words -->
+            <div class="parents-words">
+
+                <span class="quote-mark">
+                    “
+                </span>
+
+                <p>
+                    The moment we held you,
+                    our whole world shifted.
+                </p>
+
+                <span class="quote-mark closing">
+                    ”
+                </span>
+
+                <span class="words-caption">
+                    — Mom & Dad
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Small closing message -->
+        <div class="birth-closing">
+
+            <p>
+                And just like that, our little girl
+                began her story.
+            </p>
+
+            <span></span>
+
+        </div>
+
+
+        <!-- Continue -->
+        <div class="continue-reading">
+
+            <span>
+                There's more to my story
+            </span>
+
+            <div>↓</div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- =========================================
+     SECTION 4 — A SPECIAL ROLE IN MY LIFE
+========================================= -->
+
+<section id="godparent-story" class="godparent-story-section">
+
+    <div class="godparent-story-container">
+
+        <!-- Chapter label -->
+        <p class="story-eyebrow">
+            Chapter Three
+        </p>
+
+
+        <!-- Section title -->
+        <h2 class="godparent-story-title">
+            A Special Role
+            <span>in My Life</span>
+        </h2>
+
+
+        <!-- Decorative divider -->
+        <div class="story-divider">
+
+            <span></span>
+
+            <span>✦</span>
+
+            <span></span>
+
+        </div>
+
+
+        <!-- Main message -->
+        <div class="godparent-letter">
+
+            <!-- Decorative quote -->
+            <div class="letter-symbol">
+            </div>
+
+
+            <p>
+                As I grow and explore this big world,
+                Mom and Dad want to surround me with
+                people who inspire, guide, and love
+                with open hearts.
+            </p>
+
+
+            <p>
+                You are someone they
+                <em>deeply cherish and trust.</em>
+            </p>
+
+
+            <p>
+                Being a godparent is a special journey,
+                and we want this to be a meaningful
+                choice for you.
+            </p>
+
+
+            <!-- Zero pressure message -->
+            <div class="zero-pressure">
+
+                <div class="pressure-icon">
+                    ✦
+                </div>
+
+                <h3>
+                    There is absolutely no pressure.
+                </h3>
+
+                <p>
+                    Whether you are ready to take on
+                    this responsibility or prefer to
+                    simply cheer me on as a family friend,
+                    your place in our lives remains
+                    just as special.
+                </p>
+
+            </div>
+
+
+            <!-- Closing -->
+            <div class="letter-closing">
+
+                <p>
+                    All we hope is that you know
+                    how much you mean to us.
+                </p>
+
+                <span>
+                    With love,
+                </span>
+
+                <strong>
+                    Kaleigh
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- Transition toward question -->
+        <div class="question-introduction">
+
+            <p>
+                And so, I have one little question
+                to ask you...
+            </p>
+
+            <span>↓</span>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- =========================================
+     SECTION 5 — THE BIG QUESTION
+========================================= -->
+
+<section id="big-question" class="question-section">
+
+    <div class="question-container">
+
+        <!-- Decorative stars -->
+        <div class="question-star star-one">✦</div>
+        <div class="question-star star-two">✦</div>
+        <div class="question-star star-three">✦</div>
+
+
+        <!-- Small introduction -->
+        <p class="question-eyebrow">
+            One Little Question
+        </p>
+
+
+        <!-- Main question -->
+        <h2 class="question-title">
+            Will you be
+            <span>my <strong id="question-role">Godparent</strong>?</span>
+        </h2>
+
+
+        <!-- Baby name -->
+        <p class="question-name">
+            Kaleigh Franzelle Cordova Occo
+        </p>
+
+
+        <!-- Decorative heart -->
+        <div class="question-heart">
+        </div>
+
+
+        <!-- Personal message -->
+        <p class="question-message">
+            I may be little, but I already know
+            how lucky I am to have people like you
+            in my life.
+        </p>
+
+
+        <!-- Response buttons -->
+        <div class="response-buttons">
+
+            <button
+                type="button"
+                class="response-btn yes-btn"
+                id="yes-button"
+            >
+
+                <span class="button-icon">
+                </span>
+
+                <span>
+                    YES, WITH PLEASURE!
+                </span>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="response-btn guest-btn"
+                id="guest-button"
+            >
+
+                <span class="button-icon">
+                </span>
+
+                <span>
+                    I'LL CHEER AS A GUEST
+                </span>
+
+            </button>
+
+        </div>
+
+
+        <!-- Small reassurance -->
+        <p class="question-note">
+            Whatever your answer, please know
+            that there is absolutely no pressure.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     RESPONSE POPUP
+========================================= -->
+
+<div
+    id="response-popup"
+    class="response-popup"
+    aria-hidden="true"
+>
+
+    <div class="response-popup-card">
+
+        <button
+            type="button"
+            id="close-popup"
+            class="close-popup"
+            aria-label="Close"
+        >
+            ×
+        </button>
+
+        <div class="popup-symbol">
+            ✦
+        </div>
+
+        <h2 id="popup-title">
+            Thank You So Much!
+        </h2>
+
+        <div
+            id="popup-message"
+            class="popup-message"
+        >
+        </div>
+
+        <div class="popup-divider">
+            <span></span>
+            <span></span>
+        </div>
+
+        <button
+            type="button"
+            id="popup-continue"
+            class="popup-continue"
+        >
+            Continue
+        </button>
+
+    </div>
+
+</div>
+<!-- =========================================
+     SECTION 6 — PERSONAL RESPONSE
+========================================= -->
+
+<section
+    id="response-section"
+    class="response-section"
+>
+
+    <div class="response-container">
+
+        <p class="response-eyebrow">
+            One Little Note
+        </p>
+
+        <h2 class="response-title">
+            Leave a little message
+        </h2>
+
+        <p class="response-introduction">
+            Thank you for taking the time to read
+            Kaleigh's little story. We'd love to
+            keep your answer as a little memory
+            from this special moment.
+        </p>
+
+
+        <!-- RSVP FORM -->
+
+        <form
+            id="godparent-form"
+            class="godparent-form"
+        >
+
+            <!-- NAME -->
+
+            <div class="form-field">
+
+                <label for="respondent-name">
+                    Your Name
+                    <span>*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="respondent-name"
+                    name="name"
+                    placeholder="Enter your name"
+                    required
+                >
+
+            </div>
+
+
+            <!-- RELATIONSHIP -->
+
+            <div class="form-field">
+
+                <label for="relationship">
+                    How do you call yourself with Kaleigh?
+                    <small>Optional</small>
+                </label>
+
+                <input
+                    type="text"
+                    id="relationship"
+                    name="relationship"
+                    placeholder="e.g. Tita, Tito, Auntie, Uncle"
+                >
+
+            </div>
+
+
+            <!-- RESPONSE -->
+
+            <div class="form-field">
+
+                <label>
+                    Your Answer
+                </label>
+
+                <div
+                    id="selected-response"
+                    class="selected-response"
+                >
+                    —
+                </div>
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <div class="form-field">
+
+                <label for="message">
+                    Leave a little message for Kaleigh
+                    <small>Optional</small>
+                </label>
+
+                <textarea
+                    id="message"
+                    name="message"
+                    rows="5"
+                    placeholder="Write something Kaleigh can read someday..."
+                ></textarea>
+
+            </div>
+
+
+            <!-- SUBMIT -->
+
+            <button
+                type="submit"
+                class="form-submit"
+            >
+                Send My Answer
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+<!-- JavaScript -->
+
+<script src="script.js"></script>
+
+</body>
+</html>
