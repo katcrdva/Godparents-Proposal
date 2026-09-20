@@ -1,737 +1,788 @@
-/* =========================================
-   GOOGLE SHEETS CONNECTION
-========================================= */
-
-const GOOGLE_SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbyF8o1uD-brx2NMHHKQ9NzZK7SAdgV-FKrVwfuYkmpRB24wFdw4b0kLuzCGqWSIzwd4lw/exec";
-/* =========================================
-   GODPARENT PROPOSAL WEBSITE
-   MAIN JAVASCRIPT
-========================================= */
+/* =====================================================
+   KALEIGH BAPTISM INVITATION - MAIN SCRIPT
+   ===================================================== */
 
 
-/* =========================================
-   ELEMENTS
-========================================= */
+/* =====================================================
+   TYPEWRITER
+   ===================================================== */
 
-const openingScreen = document.getElementById("opening-screen");
-const typingText = document.getElementById("typing-text");
-const openProposalButton = document.getElementById("open-proposal");
+const typingElement = document.getElementById("typing");
 
-const mainContent = document.getElementById("main-content");
+const typingText = "A Beautiful Blessing";
 
-const backgroundMusic = document.getElementById("background-music");
-const musicToggle = document.getElementById("music-toggle");
+let typingIndex = 0;
 
+function typeWriter() {
 
-/* =========================================
-   TYPING ANIMATION
-========================================= */
+    if (!typingElement) return;
 
-const message = "Has a special question for you";
+    if (typingIndex < typingText.length) {
 
-let characterIndex = 0;
+        typingElement.innerHTML += typingText.charAt(typingIndex);
 
+        typingIndex++;
 
-function typeMessage() {
-
-    if (characterIndex < message.length) {
-
-        typingText.textContent += message.charAt(characterIndex);
-
-        characterIndex++;
-
-        setTimeout(typeMessage, 70);
-
+        setTimeout(typeWriter, 90);
     }
-
 }
 
+window.addEventListener("load", typeWriter);
 
-/* Start typing when page loads */
 
-window.addEventListener("load", () => {
+/* =====================================================
+   LOADER / OPEN INVITATION
+   ===================================================== */
 
-    setTimeout(() => {
+const loader = document.getElementById("loader");
+const envelopeScreen = document.getElementById("envelopeScreen");
+const hero = document.getElementById("hero");
+const enterButton = document.getElementById("enterButton");
 
-        typeMessage();
 
-    }, 800);
+if (enterButton) {
 
-});
+    enterButton.addEventListener("click", function () {
 
+        /*
+         * Music is handled by the bgMusic player below.
+         * We don't call a nonexistent #music element here.
+         */
 
-/* =========================================
-   OPEN PROPOSAL
-========================================= */
+        if (loader) {
 
-openProposalButton.addEventListener("click", async () => {
+            loader.style.opacity = "0";
 
-    /*
-        IMPORTANT:
+            setTimeout(function () {
 
-        The music starts here because this function
-        runs directly after the user's button click.
+                loader.style.display = "none";
 
-        This gives the browser permission to play
-        the audio with sound.
-    */
+                if (envelopeScreen) {
+                    envelopeScreen.style.display = "flex";
+                }
 
-    try {
-
-        backgroundMusic.volume = 0.35;
-
-        await backgroundMusic.play();
-
-        musicToggle.classList.add("show");
-
-        musicToggle.setAttribute(
-            "aria-label",
-            "Turn music off"
-        );
-
-        musicToggle.setAttribute(
-            "title",
-            "Music On"
-        );
-
-    } catch (error) {
-
-        console.log(
-            "Music could not start automatically:",
-            error
-        );
-
-    }
-
-
-    /* Hide opening screen */
-
-    openingScreen.classList.add("hide");
-
-
-    /* Show main website */
-
-    setTimeout(() => {
-
-        mainContent.classList.add("show");
-
-    }, 500);
-
-});
-
-
-/* =========================================
-   MUSIC ON / OFF
-========================================= */
-
-musicToggle.addEventListener("click", () => {
-
-    if (backgroundMusic.paused) {
-
-        backgroundMusic.play();
-
-        musicToggle.textContent = "♫";
-
-        musicToggle.setAttribute(
-            "aria-label",
-            "Turn music off"
-        );
-
-        musicToggle.setAttribute(
-            "title",
-            "Music On"
-        );
-
-    } else {
-
-        backgroundMusic.pause();
-
-        musicToggle.textContent = "🔇";
-
-        musicToggle.setAttribute(
-            "aria-label",
-            "Turn music on"
-        );
-
-        musicToggle.setAttribute(
-            "title",
-            "Music Off"
-        );
-
-    }
-
-});
-/* =========================================
-   PERSONALIZED GODPARENT GREETING
-========================================= */
-
-const urlParams = new URLSearchParams(window.location.search);
-
-const godparentName =
-    urlParams.get("name");
-
-const godparentRole =
-    urlParams.get("role");
-
-const questionRoleElement =
-    document.getElementById("question-role");
-
-
-/* =========================================
-   GODPARENT TITLE FOR THE BIG QUESTION
-
-   Tita  → Ninang
-   Tito  → Ninong
-========================================= */
-
-if (godparentRole === "Tita") {
-
-    questionRoleElement.textContent =
-        "Ninang";
-
-} else if (godparentRole === "Tito") {
-
-    questionRoleElement.textContent =
-        "Ninong";
-
-} else {
-
-    questionRoleElement.textContent =
-        "Godparent";
-
-}
-const roleElement =
-    document.getElementById("godparent-role");
-
-const nameElement =
-    document.getElementById("godparent-name");
-
-
-if (godparentName) {
-
-    nameElement.textContent =
-        godparentName;
-
-}
-
-
-if (godparentRole) {
-
-    roleElement.textContent =
-        godparentRole;
-
-} else {
-
-    roleElement.textContent =
-        "Someone Special";
-
-}
-/* =========================================
-   RESPONSE POPUP
-========================================= */
-
-let currentResponse = "";
-
-
-const yesButton =
-    document.getElementById("yes-button");
-
-const guestButton =
-    document.getElementById("guest-button");
-  
-    const responsePopup =
-    document.getElementById("response-popup");
-
-const popupTitle =
-    document.getElementById("popup-title");
-
-const popupMessage =
-    document.getElementById("popup-message");
-
-const closePopupButton =
-    document.getElementById("close-popup");
-
-const popupContinueButton =
-    document.getElementById("popup-continue");
-
-const selectedResponse =
-    document.getElementById("selected-response");
-
-const godparentForm =
-    document.getElementById("godparent-form");
-  
-/* =========================================
-   OPEN RESPONSE POPUP
-========================================= */
-
-function showResponsePopup(response) {
-
-    currentResponse = response;
-
-
-    /* =========================================
-       UPDATE RSVP RESPONSE
-    ========================================= */
-
-    if (selectedResponse) {
-
-        if (currentResponse === "yes") {
-
-            selectedResponse.textContent =
-                "YES, WITH PLEASURE!";
-
-        } else {
-
-            selectedResponse.textContent =
-                "I'LL CHEER AS A GUEST";
-
+            }, 800);
         }
 
-    }
+    });
+}
 
 
-    /* YES RESPONSE */
+/* =====================================================
+   ENVELOPE OPENING
+   ===================================================== */
 
-    if (response === "yes") {
-
-        popupTitle.textContent =
-            "Thank You So Much!";
-
-
-        popupMessage.innerHTML = `
-            My heart is so full! Thank you for
-            choosing to walk alongside me as my
-            godparent. We are so excited to share
-            this sacred milestone with you.
-            <br><br>
-            An official invitation with all the
-            christening details will be sent to you
-            very soon!
-            <br><br>
-            <em>Lots of love, Kaleigh Franzelle</em>
-        `;
-
-    }
+const envelope = document.querySelector(".envelope");
 
 
-    /* GUEST RESPONSE */
+if (envelope) {
 
-    else {
+    envelope.addEventListener("click", function () {
 
-        popupTitle.textContent =
-            "Thank You From the Bottom of Our Hearts!";
+        this.classList.add("open");
 
+        setTimeout(function () {
 
-        popupMessage.innerHTML = `
-            Thank you so much for reading my story.
-            We completely understand, and we value
-            your honesty and love!
-            <br><br>
-            Your presence in our family's life means
-            the world to us. We would still be
-            overjoyed to have you celebrate my baptism
-            as our guest if your schedule permits.
-            <br><br>
-            We'll send over an invitation with the
-            date, time, and venue details soon!
-            <br><br>
-            <em>Lots of love, Kaleigh Franzelle</em>
-        `;
+            if (envelopeScreen) {
+                envelopeScreen.style.opacity = "0";
+            }
 
-    }
+        }, 1500);
 
 
-    /* SHOW POPUP */
+        setTimeout(function () {
 
-    responsePopup.classList.add(
-        "popup-visible"
-    );
+            if (envelopeScreen) {
+                envelopeScreen.style.display = "none";
+            }
 
-    responsePopup.setAttribute(
-        "aria-hidden",
-        "false"
-    );
+            if (hero) {
+                hero.style.display = "block";
+            }
 
+            document.body.style.overflow = "auto";
 
-    document.body.classList.add(
-        "popup-open"
-    );
+            window.scrollTo(0, 0);
+
+        }, 2200);
+
+    });
 
 }
 
 
-/* =========================================
-   CLOSE RESPONSE POPUP
-========================================= */
+/* =====================================================
+   FADE-IN SECTIONS
+   ===================================================== */
 
-function closeResponsePopup() {
+const fadeSections = document.querySelectorAll(".fade");
 
-    if (!responsePopup) return;
+if (fadeSections.length > 0) {
 
+    const observer = new IntersectionObserver(function (entries) {
 
-    responsePopup.classList.remove(
-        "popup-visible"
-    );
+        entries.forEach(function (entry) {
 
+            if (entry.isIntersecting) {
 
-    responsePopup.setAttribute(
-        "aria-hidden",
-        "true"
-    );
-
-
-    document.body.classList.remove(
-        "popup-open"
-    );
-
-}
-
-
-/* =========================================
-   YES BUTTON
-========================================= */
-
-if (yesButton) {
-
-    yesButton.addEventListener(
-        "click",
-        () => {
-
-            showResponsePopup("yes");
-
-        }
-    );
-
-}
-
-
-/* =========================================
-   GUEST BUTTON
-========================================= */
-
-if (guestButton) {
-
-    guestButton.addEventListener(
-        "click",
-        () => {
-
-            showResponsePopup("guest");
-
-        }
-    );
-
-}
-
-
-/* =========================================
-   CLOSE BUTTON
-========================================= */
-
-if (closePopupButton) {
-
-    closePopupButton.addEventListener(
-        "click",
-        closeResponsePopup
-    );
-
-}
-
-
-/* =========================================
-   CONTINUE BUTTON
-========================================= */
-
-if (popupContinueButton) {
-
-    popupContinueButton.addEventListener(
-        "click",
-        () => {
-
-            closeResponsePopup();
-
-
-            const responseSection =
-                document.getElementById(
-                    "response-section"
-                );
-
-
-            if (responseSection) {
-
-                setTimeout(() => {
-
-                    responseSection.scrollIntoView({
-                        behavior: "smooth"
-                    });
-
-                }, 300);
+                entry.target.classList.add("show");
 
             }
 
-        }
-    );
+        });
+
+    });
+
+    fadeSections.forEach(function (section) {
+
+        observer.observe(section);
+
+    });
 
 }
 
 
-/* =========================================
-   CLICK OUTSIDE POPUP
-========================================= */
+/* =====================================================
+   NAME STORY BOOK ANIMATION
+   ===================================================== */
 
-if (responsePopup) {
-
-    responsePopup.addEventListener(
-        "click",
-        (event) => {
-
-            if (
-                event.target ===
-                responsePopup
-            ) {
-
-                closeResponsePopup();
-
-            }
-
-        }
-    );
-
-}
+const books = document.querySelectorAll(".book");
 
 
-/* =========================================
-   ESCAPE KEY
-========================================= */
+if (books.length > 0) {
 
-document.addEventListener(
-    "keydown",
-    (event) => {
+    const bookObserver = new IntersectionObserver(function (entries) {
 
-        if (event.key === "Escape") {
+        entries.forEach(function (entry) {
 
-            closeResponsePopup();
+            if (entry.isIntersecting) {
 
-        }
+                entry.target.animate(
 
-    }
-);
-/* =========================================
-   RSVP FORM SUBMISSION
-   SEND RESPONSE TO GOOGLE SHEETS
-========================================= */
-
-let formSubmitting = false;
-
-if (godparentForm) {
-
-    godparentForm.addEventListener(
-        "submit",
-        async (event) => {
-
-            /* Prevent page refresh */
-
-            event.preventDefault();
-
-if (formSubmitting) {
-    return;
-}
-
-formSubmitting = true;
-
-            /* Get form values */
-
-            const name =
-                document
-                    .getElementById("respondent-name")
-                    .value
-                    .trim();
-
-            const relationship =
-                document
-                    .getElementById("relationship")
-                    .value
-                    .trim();
-
-            const message =
-                document
-                    .getElementById("message")
-                    .value
-                    .trim();
-
-
-            /* Make sure a response exists */
-
-            if (!currentResponse) {
-
-                alert(
-                    "Please choose your answer first."
-                );
-
-                return;
-
-            }
-
-
-            /* Convert response */
-
-            const responseText =
-                currentResponse === "yes"
-                    ? "YES, WITH PLEASURE!"
-                    : "I'LL CHEER AS A GUEST";
-
-
-            /* Get personalized role */
-
-            const godparentRole =
-                urlParams.get("role") || "";
-
-
-            /* Create data to send */
-
-            const responseData = {
-
-                name: name,
-
-                relationship: relationship,
-
-                response: responseText,
-
-                message: message,
-
-                godparentRole: godparentRole
-
-            };
-
-
-            /* Find submit button */
-
-            const submitButton =
-                godparentForm.querySelector(
-                    ".form-submit"
-                );
-
-
-            /* Loading state */
-
-            if (submitButton) {
-
-                submitButton.disabled = true;
-
-                submitButton.textContent =
-                    "Sending...";
-
-            }
-
-
-            try {
-
-                /* Send to Google Apps Script */
-
-                await fetch(
-                    GOOGLE_SCRIPT_URL,
-                    {
-                        method: "POST",
-
-                        mode: "no-cors",
-
-                        headers: {
-                            "Content-Type":
-                                "text/plain;charset=utf-8"
+                    [
+                        {
+                            opacity: 0,
+                            transform: "translateY(80px) scale(.97)"
                         },
 
-                        body:
-                            JSON.stringify(
-                                responseData
-                            )
+                        {
+                            opacity: 1,
+                            transform: "translateY(0) scale(1)"
+                        }
+                    ],
+
+                    {
+                        duration: 1400,
+                        fill: "forwards",
+                        easing: "ease"
                     }
+
                 );
 
+                bookObserver.unobserve(entry.target);
 
-                /* Show success message */
+            }
 
-                showFormSuccess(name);
+        });
 
-
-            } catch (error) {
-
-                console.error(
-                    "Error sending response:",
-                    error
-                );
-
-                formSubmitting = false;
-
-                alert(
-                    "Something went wrong while sending your answer. Please try again."
-                );
+    });
 
 
-                /* Restore button */
+    books.forEach(function (book) {
 
-                if (submitButton) {
+        book.style.opacity = "0";
 
-                    submitButton.disabled =
-                        false;
+        bookObserver.observe(book);
 
-                    submitButton.textContent =
-                        "Send My Answer";
+    });
+
+}
+
+
+/* =====================================================
+   GALLERY
+   ===================================================== */
+
+const galleryItems = document.querySelectorAll(".gallery-item");
+
+const lightbox = document.getElementById("lightbox");
+
+const lightboxImage = document.getElementById("lightboxImage");
+
+const closeLightbox = document.getElementById("closeLightbox");
+
+const prevPhoto = document.getElementById("prevPhoto");
+
+const nextPhoto = document.getElementById("nextPhoto");
+
+let currentPhoto = 0;
+
+
+/* Gallery fade animation */
+
+if (galleryItems.length > 0) {
+
+    const galleryGrid = document.querySelector(".gallery-grid");
+
+    if (galleryGrid) {
+
+        const galleryObserver = new IntersectionObserver(
+
+            function (entries) {
+
+                entries.forEach(function (entry) {
+
+                    if (entry.isIntersecting) {
+
+                        galleryItems.forEach(function (photo, index) {
+
+                            setTimeout(function () {
+
+                                photo.classList.add("show");
+
+                            }, index * 150);
+
+                        });
+
+                        galleryObserver.unobserve(entry.target);
+
+                    }
+
+                });
+
+            },
+
+            {
+                threshold: 0.2
+            }
+
+        );
+
+        galleryObserver.observe(galleryGrid);
+
+    }
+
+}
+
+
+/* Gallery lightbox */
+
+function showPhoto() {
+
+    if (!lightboxImage || galleryItems.length === 0) return;
+
+    lightboxImage.src = galleryItems[currentPhoto].src;
+
+}
+
+
+galleryItems.forEach(function (photo, index) {
+
+    photo.addEventListener("click", function () {
+
+        currentPhoto = index;
+
+        showPhoto();
+
+        if (lightbox) {
+            lightbox.style.display = "flex";
+        }
+
+        document.body.style.overflow = "hidden";
+
+    });
+
+});
+
+
+if (nextPhoto) {
+
+    nextPhoto.addEventListener("click", function () {
+
+        currentPhoto++;
+
+        if (currentPhoto >= galleryItems.length) {
+            currentPhoto = 0;
+        }
+
+        showPhoto();
+
+    });
+
+}
+
+
+if (prevPhoto) {
+
+    prevPhoto.addEventListener("click", function () {
+
+        currentPhoto--;
+
+        if (currentPhoto < 0) {
+            currentPhoto = galleryItems.length - 1;
+        }
+
+        showPhoto();
+
+    });
+
+}
+
+
+if (closeLightbox) {
+
+    closeLightbox.addEventListener("click", function () {
+
+        if (lightbox) {
+            lightbox.style.display = "none";
+        }
+
+        document.body.style.overflow = "auto";
+
+    });
+
+}
+
+
+if (lightbox) {
+
+    lightbox.addEventListener("click", function (event) {
+
+        if (event.target === lightbox) {
+
+            lightbox.style.display = "none";
+
+            document.body.style.overflow = "auto";
+
+        }
+
+    });
+
+}
+
+
+/* =====================================================
+   BIRTH CARDS
+   ===================================================== */
+
+const birthCards = document.querySelectorAll(".birth-card");
+
+
+if (birthCards.length > 0) {
+
+    const birthGrid = document.querySelector(".birth-grid");
+
+    if (birthGrid) {
+
+        const birthObserver = new IntersectionObserver(
+
+            function (entries) {
+
+                entries.forEach(function (entry) {
+
+                    if (entry.isIntersecting) {
+
+                        birthCards.forEach(function (card, index) {
+
+                            setTimeout(function () {
+
+                                card.classList.add("show");
+
+                            }, index * 180);
+
+                        });
+
+                        birthObserver.unobserve(entry.target);
+
+                    }
+
+                });
+
+            },
+
+            {
+                threshold: 0.25
+            }
+
+        );
+
+        birthObserver.observe(birthGrid);
+
+    }
+
+}
+
+
+/* =====================================================
+   COUNTDOWN
+   ===================================================== */
+
+const targetDate = new Date(
+    "September 26, 2026 10:00:00"
+).getTime();
+
+
+function updateCountdown() {
+
+    const now = new Date().getTime();
+
+    const distance = targetDate - now;
+
+
+    const daysElement = document.getElementById("days");
+    const hoursElement = document.getElementById("hours");
+    const minutesElement = document.getElementById("minutes");
+    const secondsElement = document.getElementById("seconds");
+
+
+    if (
+        !daysElement ||
+        !hoursElement ||
+        !minutesElement ||
+        !secondsElement
+    ) {
+        return;
+    }
+
+
+    if (distance <= 0) {
+
+        daysElement.innerHTML = "00";
+        hoursElement.innerHTML = "00";
+        minutesElement.innerHTML = "00";
+        secondsElement.innerHTML = "00";
+
+        return;
+    }
+
+
+    const days = Math.floor(
+        distance / (1000 * 60 * 60 * 24)
+    );
+
+    const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24))
+        / (1000 * 60 * 60)
+    );
+
+    const minutes = Math.floor(
+        (distance % (1000 * 60 * 60))
+        / (1000 * 60)
+    );
+
+    const seconds = Math.floor(
+        (distance % (1000 * 60))
+        / 1000
+    );
+
+
+    daysElement.innerHTML = String(days).padStart(2, "0");
+
+    hoursElement.innerHTML = String(hours).padStart(2, "0");
+
+    minutesElement.innerHTML = String(minutes).padStart(2, "0");
+
+    secondsElement.innerHTML = String(seconds).padStart(2, "0");
+
+}
+
+
+updateCountdown();
+
+setInterval(updateCountdown, 1000);
+
+
+/* =====================================================
+   TIMELINE
+   ===================================================== */
+
+const timelineItems = document.querySelectorAll(".timeline-item");
+
+
+if (timelineItems.length > 0) {
+
+    const timelineObserver = new IntersectionObserver(
+
+        function (entries) {
+
+            entries.forEach(function (entry) {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add("show");
+
+                    timelineObserver.unobserve(entry.target);
 
                 }
 
-            }
+            });
+
+        },
+
+        {
+            threshold: 0.25
+        }
+
+    );
+
+
+    timelineItems.forEach(function (item) {
+
+        timelineObserver.observe(item);
+
+    });
+
+}
+
+
+/* =====================================================
+   RSVP
+   ===================================================== */
+
+const rsvpForm = document.getElementById("rsvpForm");
+
+const successPopup = document.getElementById("successPopup");
+
+const closePopupButton = document.getElementById("closePopupButton");
+
+
+if (rsvpForm) {
+
+    rsvpForm.addEventListener("submit", function (event) {
+
+        /*
+         * IMPORTANT:
+         * Stop the browser from refreshing/submitting the form.
+         */
+
+        event.preventDefault();
+
+        console.log("RSVP form submitted");
+
+
+        /*
+         * Show success popup
+         */
+
+        if (successPopup) {
+
+            successPopup.classList.add("show");
+
+            console.log("RSVP popup opened");
+
+        } else {
+
+            console.error(
+                "RSVP ERROR: #successPopup was not found in the HTML."
+            );
 
         }
-    );
+
+
+        /*
+         * Clear form
+         */
+
+        rsvpForm.reset();
+
+    });
+
+}
+
+
+/* =====================================================
+   CLOSE RSVP POPUP
+   ===================================================== */
+
+function closePopup() {
+
+    if (successPopup) {
+
+        successPopup.classList.remove("show");
+
+    }
+
+}
+
+
+/*
+ * Make closePopup available to HTML onclick=""
+ */
+
+window.closePopup = closePopup;
+
+
+if (closePopupButton) {
+
+    closePopupButton.addEventListener("click", function () {
+
+        closePopup();
+
+    });
+
+}
+
+
+/* =====================================================
+   MUSIC PLAYER
+   ===================================================== */
+
+const bgMusic = document.getElementById("bgMusic");
+
+const musicButton = document.getElementById("musicBtn");
+
+let musicPlaying = false;
+
+
+if (musicButton && bgMusic) {
+
+    musicButton.addEventListener("click", function () {
+
+        if (musicPlaying) {
+
+            bgMusic.pause();
+
+            musicButton.innerHTML = "♪";
+
+            musicPlaying = false;
+
+        } else {
+
+            bgMusic.play()
+                .then(function () {
+
+                    musicButton.innerHTML = "❚❚";
+
+                    musicPlaying = true;
+
+                })
+                .catch(function (error) {
+
+                    console.log(
+                        "Music could not be played:",
+                        error
+                    );
+
+                });
+
+        }
+
+    });
+
+}
+
+
+/* =====================================================
+   SCROLL PROGRESS BAR
+   ===================================================== */
+
+window.addEventListener("scroll", function () {
+
+    const progressBar =
+        document.getElementById("progressBar");
+
+    if (!progressBar) return;
+
+
+    const winScroll =
+        document.documentElement.scrollTop;
+
+    const height =
+        document.documentElement.scrollHeight
+        - document.documentElement.clientHeight;
+
+
+    if (height > 0) {
+
+        progressBar.style.width =
+            (winScroll / height) * 100 + "%";
+
+    }
+
+});
+
+
+/* =====================================================
+   BACK TO TOP BUTTON
+   ===================================================== */
+
+const topButton = document.getElementById("topBtn");
+
+
+if (topButton) {
+
+    window.addEventListener("scroll", function () {
+
+        if (window.scrollY > 500) {
+
+            topButton.style.display = "block";
+
+        } else {
+
+            topButton.style.display = "none";
+
+        }
+
+    });
+
+
+    topButton.addEventListener("click", function () {
+
+        window.scrollTo({
+
+            top: 0,
+
+            behavior: "smooth"
+
+        });
+
+    });
 
 }
 /* =========================================
-   FORM SUCCESS MESSAGE
+   RSVP POPUP TEST
 ========================================= */
 
-function showFormSuccess(name) {
+document.addEventListener("DOMContentLoaded", function () {
 
-    const responseSection =
-        document.getElementById(
-            "response-section"
-        );
+    const rsvpForm = document.getElementById("rsvpForm");
+    const successPopup = document.getElementById("successPopup");
+    const closePopupButton = document.getElementById("closePopupButton");
 
-    if (!responseSection) return;
+    console.log("RSVP form:", rsvpForm);
+    console.log("Success popup:", successPopup);
+    console.log("Close button:", closePopupButton);
 
+    if (!rsvpForm) {
+        console.error("❌ rsvpForm was NOT found.");
+        return;
+    }
 
-    responseSection.innerHTML = `
+    if (!successPopup) {
+        console.error("❌ successPopup was NOT found.");
+        return;
+    }
 
-        <div class="response-container form-success">
+    rsvpForm.addEventListener("submit", function (event) {
 
-            <p class="response-eyebrow">
-                Thank You
-            </p>
+        event.preventDefault();
 
-            <h2 class="response-title">
-                Thank you, ${name}.
-            </h2>
+        console.log("✅ RSVP SUBMITTED");
 
-            <p class="response-introduction">
+        successPopup.classList.add("show");
 
-                Your answer has been received.
+        rsvpForm.reset();
 
-                <br><br>
+    });
 
-                We are so grateful that you took
-                the time to be part of this little
-                moment in Kaleigh's story.
+    if (closePopupButton) {
 
-                <br><br>
+        closePopupButton.addEventListener("click", function () {
 
-                <em>
-                    Lots of love,<br>
-                    Kaleigh Franzelle
-                </em>
+            successPopup.classList.remove("show");
 
-            </p>
+        });
 
-        </div>
+    }
 
-    `;
-
-}
+});
